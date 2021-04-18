@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "C:\\Python39\\python.exe",
+    "cSpell.words": [
+        "bson",
+        "jsonify",
+        "mongodb",
+        "objectid",
+        "pymongo"
+    ]
+}
