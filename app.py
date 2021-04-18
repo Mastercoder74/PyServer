@@ -24,15 +24,17 @@ mongo = PyMongo(app)
 @cross_origin(supports_credentials=True)
 def add_user():
     _json = request.json
-    _name = _json['name']
-    _email = _json['email']
-    _password = _json['pwd']
+
+    # _name = _json['name']
+    # _email = _json['email']
+    # _password = _json['pwd']
 
     _formArray = _json['formArray']
+    _optionsArray = _json['optionsArray']
 
-    if _name and _email and _password and _formArray and request.method == 'POST':
+    if _formArray and request.method == 'POST':
 
-        id = mongo.db.user.insert_one({'name':_name, 'email':_email, 'pwd':_password, 'formArray':_formArray})
+        id = mongo.db.user.insert_one({'formArray':_formArray, 'optionsArray': _optionsArray})
 
         resp = jsonify("User Added Successfully!")
 
