@@ -57,6 +57,30 @@ def add_user():
     else:
         return not_found()
 
+@app.route('/answer', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def add_answer():
+    _json = request.json
+
+    # _name = _json['name']
+    # _email = _json['email']
+    # _password = _json['pwd']
+
+    _answerString = _json['answerString']
+
+    if _answerString and request.method == 'POST':
+
+        id = mongo.db.user.insert_one({'answerString': _answerString})
+
+        resp = jsonify("Answer Added Successfully!")
+
+        resp.status_code = 200
+
+        return resp
+
+    else:
+        return not_found()
+
 @app.route('/users')
 @cross_origin(supports_credentials=True)
 def users():
