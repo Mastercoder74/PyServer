@@ -88,6 +88,13 @@ def users():
     resp = dumps(users)
     return resp
 
+@app.route('/answers')
+@cross_origin(supports_credentials=True)
+def answers():
+    users = mongo.db.answers.find()
+    resp = dumps(users)
+    return resp
+
 @app.route('/user/<id>')
 @cross_origin(supports_credentials=True)
 def user(id):
