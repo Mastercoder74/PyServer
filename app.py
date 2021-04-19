@@ -16,7 +16,7 @@ CORS(app, support_credentials=True)
 
 app.secret_key = "secretkey"
 
-app.config['MONGO_URI'] = "mongodb://localhost:27017/Users"
+app.config['MONGO_URI'] = "mongodb://localhost:27017/Forms"
 
 mongo = PyMongo(app)
 
@@ -67,10 +67,11 @@ def add_answer():
     # _password = _json['pwd']
 
     _answerString = _json['answerString']
+    _formID = _json['formID']
 
     if _answerString and request.method == 'POST':
 
-        id = mongo.db.answers.insert_one({'answerString': _answerString})
+        id = mongo.db.answers.insert_one({'answerString': _answerString, 'formID': _formID})
 
         resp = jsonify("Answer Added Successfully!")
 
@@ -99,6 +100,13 @@ def answers():
 @cross_origin(supports_credentials=True)
 def user(id):
     user = mongo.db.user.find_one({'_id': ObjectId(id)})
+    resp = dumps(user)
+    return resp
+
+@app.route('/answer/<id>')
+@cross_origin(supports_credentials=True)
+def answer(id):
+    user = mongo.db.answers.find_one({'_id': ObjectId(id)})
     resp = dumps(user)
     return resp
 
