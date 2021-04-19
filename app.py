@@ -70,7 +70,7 @@ def add_answer():
 
     if _answerString and request.method == 'POST':
 
-        id = mongo.db.user.insert_one({'answerString': _answerString})
+        id = mongo.db.answers.insert_one({'answerString': _answerString})
 
         resp = jsonify("Answer Added Successfully!")
 
