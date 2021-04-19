@@ -31,10 +31,22 @@ def add_user():
 
     _formArray = _json['formArray']
     _optionsArray = _json['optionsArray']
+    _inputString = _json['inputString']
+    _questionType = _json['questionType']
+
+    _radioOption1 = _json['radioOption1']
+    _radioOption2 = _json['radioOption2']
+    _radioOption3 = _json['radioOption3']
+    _radioOption4 = _json['radioOption4']
+  
+    _multiOption1 = _json['multiOption1']
+    _multiOption2 = _json['multiOption2']
+    _multiOption3 = _json['multiOption3']
+    _multiOption4 = _json['multiOption4']
 
     if _formArray and request.method == 'POST':
 
-        id = mongo.db.user.insert_one({'formArray':_formArray, 'optionsArray': _optionsArray})
+        id = mongo.db.user.insert_one({'formArray':_formArray, 'optionsArray': _optionsArray, 'inputString': _inputString, 'questionType': _questionType, 'radioOption1': _radioOption1, 'radioOption2': _radioOption2, 'radioOption3': _radioOption3, 'radioOption4': _radioOption4, 'multiOption1': _multiOption1, 'multiOption2': _multiOption2, 'multiOption3': _multiOption3, 'multiOption4': _multiOption4, })
 
         resp = jsonify("User Added Successfully!")
 
@@ -72,13 +84,29 @@ def delete_user(id):
 def update_user(id):
     _id = id
     _json = request.json
-    _name = _json['name']
-    _email = _json['email']
-    _password = _json['pwd']
 
-    if _name and _email and _password and request.method == 'PUT':
+    # _name = _json['name']
+    # _email = _json['email']
+    # _password = _json['pwd']
 
-        mongo.db.user.update_one({'_id': ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)}, {'$set': {'name':_name, 'email':_email, 'pwd':_password}})
+    _formArray = _json['formArray']
+    _optionsArray = _json['optionsArray']
+    _inputString = _json['inputString']
+    _questionType = _json['questionType']
+
+    _radioOption1 = _json['radioOption1']
+    _radioOption2 = _json['radioOption2']
+    _radioOption3 = _json['radioOption3']
+    _radioOption4 = _json['radioOption4']
+  
+    _multiOption1 = _json['multiOption1']
+    _multiOption2 = _json['multiOption2']
+    _multiOption3 = _json['multiOption3']
+    _multiOption4 = _json['multiOption4']
+
+    if _formArray and request.method == 'PUT':
+
+        mongo.db.user.update_one({'_id': ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)}, {'$set': {'formArray':_formArray, 'optionsArray': _optionsArray, 'inputString': _inputString, 'questionType': _questionType, 'radioOption1': _radioOption1, 'radioOption2': _radioOption2, 'radioOption3': _radioOption3, 'radioOption4': _radioOption4, 'multiOption1': _multiOption1, 'multiOption2': _multiOption2, 'multiOption3': _multiOption3, 'multiOption4': _multiOption4, }})
 
         resp = jsonify("User Updated Successfully!")
 
